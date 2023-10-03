@@ -1,0 +1,80 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block content %}
+<main class="page">
+   <div class="page__main-block main-block">
+      <div class="main-block__container _container">
+         <div class="main-block__body">
+            <div class="main-block__images">
+               <div class="average-image">
+                  <a href="#lastProducts" style="cursor: pointer;"><img src="{% static 'src/images/plug/average.jpg' %}" alt="Promo"></a>
+               </div>
+               <div class="small-image">
+                  <a href="https://www.twitch.tv/wainjynero" style="cursor: pointer;"><img src="{% static 'src/images/plug/small.jpg' %}" alt="Promo"></a>
+                  <a href="{% url 'shop:coupons' %}" style="cursor: pointer;"><img src="{% static 'src/images/plug/small2.jpg' %}" alt="Promo" class="small-image-bottom"></a>
+               </div>
+            </div>
+            <div class="main-block__image">
+               <img src="{% static 'src/images/plug/big.jpg' %}" alt="Promo">
+            </div>
+         </div>
+      </div>
+   </div>
+   <section class="page__catalog catalog" id="lastProducts">
+      <div class="catalog__container _container">
+         <div class="catalog__body">
+            <h1 class="catalog__title">НОВИНКИ</h1>
+            <div class="catalog__menu">
+               {% for product in last_products %}
+               <div class="catalog__item item-nav">
+                  <a href="{{ product.get_absolute_url }}">
+                     <div class="item-nav__image"><img src="{% if product.image %}{{ product.image.url }}{% else %}{% static ' img/no_image.png' %}{% endif %}"
+                           alt="Manga"></div>
+                     <h3 class="item-nav__title">{{ product.name }}</h3>
+                  </a>
+               </div>
+               {% endfor %}
+            </div>
+         </div>
+      </div>
+   </section>
+   <section class="page__top top">
+      <div class="top__container _container">
+         <div class="top__header">
+            <h2 class="top-block__title">
+               СЛУЧАЙНЫЕ ТОВАРЫ
+            </h2>
+         </div>
+         <ul class="top-block__images">
+            {% for product in random_products %}
+            <li class="top__item">
+               <a href="{{ product.get_absolute_url }}">
+                  <div class="item-top__image"><img
+                        src="{% if product.image %}{{ product.image.url }}{% else %}{% static ' img/no_image.png' %}{% endif %}"
+                        alt="{{ product.name }}" class="top-item-img"></div>
+                  <h3 class="item-top__title">{{ product.name }}</h3>
+               </a>
+            </li>
+            {% endfor %}
+         </ul>
+      </div>
+   </section>
+   <section class="page__subscribe subscribe">
+      <div class="subscribe__container _container">
+         <div class="subscribe__header header-block">
+            <h2 class="header-block__title">Узнайте первым о новинках</h2>
+         </div>
+         <div class="subscribe__body body-block">
+            <input type="email" required>
+         </div>
+         <div class="subscribe__footer">
+            <div class="subscribe__footer-button-div">
+               <button class="subscribe__footer-button">Подписаться</button>
+            </div>
+            <p class="subscribe__footer-description">Нажимая на кнопку «Подписаться», я соглашаюсь на обработку
+               моих персональных данных и ознакомлен(а) с <a href="{% url 'shop:confidentiality' %}">условиями конфиденциальности</a>.</p>
+         </div>
+      </div>
+   </section>
+</main>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block content %}
+<main class="page">
+   <div class="main-block__container _container">
+      <div class="personal-links">
+         <a href="../index.html">
+            <p>Главная</p>
+         </a>
+         <a href="favorites.html">
+            <p>Избранное</p>
+         </a>
+      </div>
+      <h2 class="page-title">Избранное</h2>
+   </div>
+   <section class="favorites__block">
+      <div class="favorites__block-div _container">
+         <div class="favorites__products _сontainer">
+            {% for item in favorites %}
+            {% with product=item.product %}
+            <div class="favorites-card">
+               <a href="{{ product.get_absolute_url }}"><img src="{% if product.image %}
+               {{ product.image.url }}
+               {% else %}
+               {% static 'img/no_image.png' %}
+               {% endif %}" alt="Manga">
+               <p>{{ product.name }}</p></a>
+               <b>{{ item.price }}</b>
+               <form action="." method="POST" class="item-delete">
+                  <button class="item-delete-btn"><a href="{% url 'favorites:favorites_remove' product.id %}"><img
+                           src="{% static 'src/images/icons/trash.svg' %}" class="delete-tresh-img"></a></button>
+               </form>
+            </div>
+            {% endwith %}
+            {% endfor %}
+         </div>
+      </div>
+   </section>
+</main>
+{% endblock %}

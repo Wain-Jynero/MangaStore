@@ -1,0 +1,25 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<h2 class="page-title">Поиск по каталогу</h2>
+  {% if query %}
+    <h1>"{{ query }}"</h1>
+    <h3>
+      {% with results.count as total_results %}
+	Найдены {{ total_results }} результаты{{ total_results|pluralize }}
+      {% endwith %}
+    </h3>
+    {% for post in results %}
+      <h4><a href="{{ c.get_absolute_url }}">{{ product.name }}</a></h4>
+    {% empty %}
+      <p>Нет результатов по Вашему запросу</p>
+    {% endfor %}
+    <p><a href="{% url 'shop:post_search' %}">Search again</a></p>
+  {% else %}
+    <h1>Search for posts</h1>
+    <form action="." method="get">
+      {{ form.as_p }}
+      <input type="submit" value="Search">
+    </form>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block content %}
+<main class="page">
+   <div class="main-block__container _container" style="padding-bottom: 0;">
+      <div class="personal-links">
+         <a href="../index.html">
+            <p>Главная</p>
+         </a>
+         <a href="contacts.html">
+            <p>Контакты</p>
+         </a>
+      </div>
+      <h2 class="page-title" style="padding-bottom: 0;">Связаться с нами</h2>
+   </div>
+   <section class="contacts">
+      <div class="contacts-proccess-info _container">
+         <div class="contacts-card">
+            <h2 class="contacts-card-title" style="font-weight: bold; font-size: 1.1em;">В социальных сетях</h2>
+            <a href="#"><img src="{% static 'src/images/icons/icons8-telegram-app.svg' %}" alt="Telegram icon"
+                  class="contacts-img"></a>
+            <a href="#"><img src="{% static 'src/images/icons/icons8-vk-circled.svg' %}" alt="VK icon"
+                  class="contacts-img"></a>
+            <a href="#"><img src="{% static 'src/images/icons/icons8-instagram.svg' %}" alt="Instagram icon"
+                  class="contacts-img"></a>
+         </div>
+         <div class="contacts-card">
+            <h2 class="contacts-card-title" style="font-weight: bold; font-size: 1.1em;">По телефону</h2>
+            <p class="contacts-card-desc">+7 (999) 000 00 00</p>
+         </div>
+         <div class="contacts-card">
+            <h2 class="contacts-card-title" style="font-weight: bold; font-size: 1.1em;">По почте</h2>
+            <p class="contacts-card-desc">info@yandex.ru</p>
+         </div>
+         <div class="contacts-card">
+            <h2 class="contacts-card-title" style="font-weight: bold; font-size: 1.1em;">Наш офис</h2>
+            <p class="contacts-card-desc">г. Красноярск, ул. Мичурина, д.18</p>
+         </div>
+      </div>
+   </section>
+   <section class="map__block">
+      <div class="block-map" style="text-align: center;">
+         <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2230.8515530620534!2d92.96370207604583!3d56.00392397262196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5cd7a544db14a743%3A0xe0dfbbf11f0374f7!2z0YPQuy4g0JzQuNGH0YPRgNC40L3QsCwgMTgsINCa0YDQsNGB0L3QvtGP0YDRgdC6LCDQmtGA0LDRgdC90L7Rj9GA0YHQutC40Lkg0LrRgNCw0LksIDY2MDAzNw!5e0!3m2!1sru!2sru!4v1683366423019!5m2!1sru!2sru"
+            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+   </section>
+   <section class="page__subscribe subscribe">
+      <div class="subscribe__container _container">
+         <div class="subscribe__header header-block">
+            <h2 class="header-block__title">Узнайте первым о новинках</h2>
+         </div>
+         <div class="subscribe__body body-block">
+            <input type="email" required>
+         </div>
+         <div class="subscribe__footer">
+            <div class="subscribe__footer-button-div">
+               <button class="subscribe__footer-button">Подписаться</button>
+            </div>
+            <p class="subscribe__footer-description">Нажимая на кнопку «Подписаться», я соглашаюсь на обработку
+               моих персональных данных и ознакомлен(а) с условиями конфиденциальности.</p>
+         </div>
+      </div>
+   </section>
+</main>
+{% endblock %}

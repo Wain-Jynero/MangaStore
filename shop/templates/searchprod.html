@@ -1,0 +1,32 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block content %}
+<main class="page">
+<h1>Результаты поиска</h1>
+{% if query %}
+<p>Результаты по запросу "{{ query }}":</p>
+{% endif %}
+
+<div class="products__block _container">
+   <ul class="products clearfix">
+      {% for product in products %}
+      <li class="product-wrapper" style="width: 33%; height: auto;">
+         <a href="{{ product.get_absolute_url }}" class="product">
+            <div class="product-photo">
+               <img
+                  src="{% if product.image %}{{ product.image.url }}{% else %}{% static ' img/no_image.png' %}{% endif %}"
+                  alt="Фото товара">
+            </div>
+         </a>
+         <div class="product-info">
+            <p class="product-name">{{ product.name }}</p>
+            <b class="product-price">{{ product.price }} ₽</b>
+         </div>
+      </li>
+      {% empty %}
+   <li>Не найдены товары по Вашему запросу.</li>
+      {% endfor %}
+   </ul>
+</div>
+</main>
+{% endblock %}

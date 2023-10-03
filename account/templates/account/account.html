@@ -1,0 +1,50 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block content %}
+<main class="page">
+    <div class="main-block__container _container">
+       <div class="personal-links">
+          <a href="../index.html">
+             <p>Главная</p>
+          </a>
+          <a href="favorites.html">
+             <p>Личный кабинет</p>
+          </a>
+       </div>
+       <h2 class="page-title">Личный кабинет</h2>
+    </div>
+    <div class="account-link-block">
+    <div class="account-link">
+      <div class="order-history-btn">
+         <button class="order-btn">История заказов</button>
+      </div>
+      <div class="personal-data-btn default">
+         <button class="data-btn default">Личные данные</button>
+      </div>
+      <div class="user-logout-btn">
+         <button class="logout-btn">Выйти</button>
+      </div>
+    </div>
+   </div>
+   <section class="order-history-pie">
+
+   </section>
+    <section class="personal__data">
+      <h2 class="personal__data-title">Персональные данные</h2>
+      <div class="personal__data-input-block">
+         <form method="POST" action="." class="data-input-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Обновить информацию</button>
+         </form>
+      </div>
+      <div class="personal__address-input-block">
+         <form method="POST" action="." class="address-input-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Обновить информацию</button>
+         </form>
+      </div>
+    </section>
+</main>
+{% endblock %}

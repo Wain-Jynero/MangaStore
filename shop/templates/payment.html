@@ -1,0 +1,54 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block content %}
+<main class="page">
+   <div class="main-block__container _container">
+      <div class="personal-links">
+         <a href="../index.html">
+            <p>Главная</p>
+         </a>
+         <a href="refund.html">
+            <p>Оплата и доставка</p>
+         </a>
+      </div>
+      <h2 class="page-title">Оплата и Доставка</h2>
+   </div>
+   <section class="payment-delivery-info">
+      <div class="payment-info _container">
+         <div class="payment-info-ul">
+            <h2 class="payment-ul-h2">Вы можете оплатить покупку одним из ниже перечисленных способов</h2>
+            <ul class="payment-ul">
+               <li>Отправка по всей России в отделение Почты России</li>
+               <li>Денежным переводом Visa/MasterCard</li>
+               <li>Полная предоплата через NNN</li>
+            </ul>
+         </div>
+         <div class="delivery-info-ul">
+            <h2 class="delivery-ul-h2">Мы готовы предложить несколько вариантов доставки</h2>
+            <ul class="delivery-ul">
+               <li>Отправка по всей России в отделение Почты России</li>
+               <li>Международные сервисы доставки (DHL)</li>
+               <li>Срок доставки +-1 неделя с момента заказа</li>
+            </ul>
+         </div>
+      </div>
+   </section>
+   <section class="payment-proccess _container">
+      <h2 class="payment-proccess-title">Процесс оформления заказа с помощью NNN</h2>
+      <div class="payment-proccess-info _container">
+         <div class="payment-card">
+            <img src="{% static 'src/images/icons/pay-click-hand-svgrepo-com.svg' %}" alt="Pay click">
+            <p>Выбрать в корзине способ оплаты NNN</p>
+         </div>
+         <div class="payment-card">
+            <img src="{% static '/src/images/icons/icons8-галочка.svg' %}" alt="Check mark">
+            <p>Подтвердить заказ</p>
+         </div>
+         <div class="payment-card">
+            <img src="{% static 'src/images/icons/debit-card-svgrepo-com.svg' %}" alt="Debit card">
+            <p>После этого Вас перенаправит на сайт NNN, где Вы выбираете удобный для Вас способ оплаты</p>
+         </div>
+      </div>
+   </section>
+</main>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block content %}
+<main class="page_container">
+<div class="order-info">
+   <div class="cart-info">
+      <h3 style="padding-bottom: 2em;">Ваш заказ</h3>
+   <ul>
+      {% for item in cart %}
+      <li>
+         {{ item.quantity }}x {{ item.product.name }}
+         <span>{{ item.total_price }}Р</span>
+      </li>
+      {% endfor %}
+   </ul>
+   </div>
+   <div>
+   </div>
+   <div class="user-info">
+      <form action="." method="post" class="order-form">
+         {{ coupon_apply_form }}
+         {{ form.as_p }}
+         <p><input type="submit" value="Оформить заказ" class="login100-form-btn"></p>
+         {% csrf_token %}
+      </form>
+   </div>
+</div>
+</main>
+{% endblock %}

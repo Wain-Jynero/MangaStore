@@ -1,0 +1,81 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block content %}
+<main class="page">
+   <div class="main-block__container _container">
+      <div class="personal-links">
+         <a href="{% url 'shop:index' %}">
+            <p>Главная</p>
+         </a>
+         <a href="{% url 'shop:product_list' %}">
+            <p>Каталог</p>
+         </a>
+         <a href="../pages/catalog.html">
+            <p>{{ product.category }}</p>
+         </a>
+         <a href="{{ product.get_absolute_url }}">
+            <p>{{ product.name }}</p>
+         </a>
+      </div>
+      <h2 class="page-title" style="font-size: 1.7em;">{{ product.name }}</h2>
+   </div>
+   <section class="product-block">
+      <div class="product__page _container">
+         <div class="product__page-img">
+            <img src="{{ product.image.url }}">
+         </div>
+         <div class="product__page-desc">
+            <p class="product-name"><b>Название: </b>{{ product.name }}</p>
+            <p class="product-price">{{ product.price }} Р</p>
+            <p class="product-author"><b>Автор: </b>{{ product.author }}</p>
+            <p class="product-desc"><b>Описание: </b>{{ product.description }}</p>
+            <p class="product-tags"><b>Тэги: </b>{% for tag in product.tags.all %}
+               <a href="{% url 'shop:product_list_by_tag' tag.slug %}">
+                  {{ tag.name }}
+               </a>
+               {% if not forloop.last %}, {% endif %}
+               {% endfor %}
+            </p>
+            <p class="product-views" style="display: none;">{{ product.views }}</p>
+            <div class="product__page__btns">
+               <form action="{% url 'cart:cart_add' product.id %}" method="POST" class="cart--form">
+                  {{ cart_product_form }}
+                  {% csrf_token %}
+                  <button class="product-card add-cart"><img src="{% static 'src/images/icons/shopping-cart-add-button_icon-icons.com_56132.svg' %}"><p>В КОРЗИНУ</p></button>
+               </form>
+               <form action="{% url 'favorites:favorites_add' product.id %}" method="POST" class="favorite--form">
+                  {% csrf_token %}
+                  {{ cart_product_form }}
+                  <button class="product-card add-favorite"><img src="{% static 'src/images/icons/seo-social-web-network-internet_132_icon-icons.com_61506.svg' %}"></button>
+               </form>
+               <form>
+                  {% csrf_token %}
+                  <button class="product-card copy-link" onclick="copyToClipboard()"><img src="{% static 'src/images/icons/external_link_icon_153574.svg' %}"></button>
+                  <script>
+                     function copyToClipboard() {
+                         var dummy = document.createElement("input");
+                         document.body.appendChild(dummy);
+                         dummy.setAttribute('value', window.location.href);
+                         dummy.select();
+                         document.execCommand('copy');
+                         document.body.removeChild(dummy);
+                     }
+                 </script>
+               </form>
+            </div>
+         </div>
+      </div>
+   </section>
+   <section class="can-favorite _container">
+      <h2 class="favorite--title">Вам может понравиться</h2>
+      <ul class="favorite__block _container">
+         {% for suggested_product in suggested_products %}
+         <li class="favorite--img" style="text-align: center;">
+            <a href="{{ suggested_product.get_absolute_url }}"><img class="favorite--img--img" src="{% if suggested_product.image %}{{ suggested_product.image.url }}{% else %}{% static ' img/no_image.png' %}{% endif %}" alt="Фото товара"></a>
+            <p>{{ suggested_product.name }}</p>
+         </li>
+         {% endfor %}
+      </ul>
+   </section>
+</main>
+{% endblock %}

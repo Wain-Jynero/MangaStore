@@ -1,0 +1,225 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://fonts.googleapis.com/css?family=Rubik+Mono+One:regular&display=swap&subset=cyrillic-ext"
+      rel="stylesheet" />
+   <link rel="stylesheet" href="{% static 'styles/style1.css' %}">
+   <title>Manga</title>
+</head>
+
+<body>
+   <div class="wrapper">
+      <header class="header">
+         <div class="header__container _container">
+            <nav class="header__menu menu">
+               <ul class="menu__list" id="menu__list">
+                  <li class="menu__icon" id="menu__icon">
+                     <button class="mobile-menu-btn"><img src="{% static 'src/images/icons/icons8-меню.svg' %}"
+                           alt="Menu icon" class="mobile__img"></button>
+                     <button class="mobile-menu-close"><img src="{% static 'src/images/icons/icons8-close.svg' %}"
+                           alt="Close icon" class="menu-close-img"></button>
+                  </li>
+                  <li>
+                     <div class="menu__content-left">
+                        <ul>
+                           <li><a href="{% url 'shop:product_list' %}">Новое</a></li>
+                           <li><a href="{% url 'shop:product_list' %}">Каталог</a></li>
+                           <li><a href="{% url 'shop:aboutus' %}">О нас</a></li>
+                        </ul>
+                     </div>
+                  </li>
+                  <li>
+                     <div class="menu__content-middle">
+                        <a href="{% url 'shop:index' %}">
+                           <h2 class="company__name">Manga</h2>
+                        </a>
+                     </div>
+                  </li>
+                  <li>
+                     <div class="menu__content-right">
+                        <button class="search-img"><img src="{% static 'src/images/icons/icons8-поиск.svg' %}" alt="Search icon"></button>
+                        <a href="{% url 'favorites:favorites_detail' %}"><img
+                              src="{% static 'src/images/icons/icons8-для-тебя.svg' %}" alt="Liked icon"></a>
+                        <a href="{% url 'cart:cart_detail' %}"><img
+                              src="{% static 'src/images/icons/basket_icon-icons.com_67985.svg' %}"
+                              alt="Basket icon"></a>
+                        <button class="autorization__btn" id="autorization__btn"><img
+                              src="{% static 'src/images/icons/icons8-наруто.svg' %}" alt="Profile icon"></button>
+                     </div>
+                  </li>
+               </ul>
+            </nav>
+         </div>
+      </header>
+      <div class="mobile-menu__container">
+         <div class="mobile-menu" id="mobile-menu">
+            <div class="mobile-menu-search-block">
+               <button class="search-img" onclick="openSearch()"><img src="{% static 'src/images/icons/icons8-поиск.svg' %}" alt="Search icon"></button>
+            </div>
+            <ul class="mobile-menu-ul">
+               <li><button class="autorization__btn-mobile" id="autorization__btn-mobile"><img
+                        src="{% static 'src/images/icons/icons8-наруто.svg' %}" alt="Profile icon"
+                        class="profile-mobile">ЛИЧНЫЙ
+                     КАБИНЕТ</button></li>
+               <li><a href="{% url 'shop:product_list' %}">Каталог</a></li>
+               <li><a href="{% url 'cart:cart_detail' %}">Корзина</a></li>
+               <li><a href="{% url 'favorites:favorites_detail' %}">Избранное</a></li>
+               <li><a href="{% url 'shop:contacts' %}">Контакты</a></li>
+            </ul>
+         </div>
+      </div>
+      <div class="modal__registration _container" id="modal">
+         <div class="limiter" id='limiter'>
+            <div class="container-login100">
+               <div class="wrap-close100">
+                  <img src="{% static 'src/images/icons/icons8-close.svg' %}" alt="Close icon" class="modal__close1">
+               </div>
+               <div class="wrap-login100">
+                  <form class="login100-form validate-form">
+                     {% csrf_token %}
+                     <h2 class="login100-form-title p-b-26">
+                        Регистрация
+                     </h2>
+                     
+                     {{ register_form }}
+
+                     <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                           <div class="login100-form-bgbtn"></div>
+                           <button class="login100-form-btn">
+                              Зарегистрироваться
+                           </button>
+                        </div>
+                     </div>
+
+                     <div class="text-center p-t-115">
+                        <span class="txt1">
+                           Есть аккаунт?
+                        </span>
+                        <button class="regisration__btn"><a class="txt2" href="#">
+                              Войти
+                           </a></button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal__autorization _container">
+         <div class="limiter">
+            <div class="container-login100">
+               <div class="wrap-close100">
+                  <img src="{% static 'src/images/icons/icons8-close.svg' %}" alt="Close icon" class="modal__close2">
+               </div>
+               <div class="wrap-login100">
+                  <form class="login100-form validate-form">
+                     {% csrf_token %}
+                     <h2 class="login100-form-title p-b-26">
+                        Авторизация
+                     </h2>
+
+                     {{ login_form }}
+
+                     <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                           <div class="login100-form-bgbtn"></div>
+                           <button class="login100-form-btn">
+                              Войти
+                           </button>
+                        </div>
+                     </div>
+
+                     <div class="text-center p-t-115">
+                        <span class="txt1">
+                           Нет аккаунта?
+                        </span>
+                        <button class="autorization__btn-reg"><a class="txt2" href="#">
+                              Зарегистрироваться
+                           </a></button>
+                     </div>
+
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <main class="page _container">
+         {% block content %}
+         {% endblock %}
+      </main>
+      <footer class="footer">
+         <div class="footer__container _container">
+            <div class="footer__company">
+               <h2 class="footer__company-title">
+                  Компания
+                  <button class="footer-btn-con"><img src="{% static 'src/images/icons/chevron-right.svg' %}"
+                        class="footer__img"></button>
+               </h2>
+               <div class="footer__company-nav">
+                  <ul class="company-nav">
+                     <li><a href="{% url 'shop:aboutus' %}">О нас</a></li>
+                     <li><a href="{% url 'shop:contacts' %}">Контакты</a></li>
+                  </ul>
+               </div>
+            </div>
+            <div class="footer__useful">
+               <h2 class="footer__useful-title">
+                  Полезное
+                  <button class="footer-btn-use"><img src="{% static 'src/images/icons/chevron-right.svg' %}"
+                        class="footer__img"></button>
+               </h2>
+               <div class="footer__useful-nav">
+                  <ul class="useful-nav">
+                     <li><a href="{% url 'shop:payment' %}">Оплата и доставка</a></li>
+                     <li><a href="{% url 'shop:refund' %}">Условия возврата</a></li>
+                     <li><a href="{% url 'shop:coupons' %}">Система купонов</a></li>
+                  </ul>
+               </div>
+            </div>
+            <div class="footer__buyer">
+               <h2 class="footer__buyer-title">
+                  Покупателю
+                  <button class="footer-btn-buy"><img src="{% static 'src/images/icons/chevron-right.svg' %}"
+                        class="footer__img"></button>
+               </h2>
+               <div class="footer__buyer-nav">
+                  <ul class="buyer-nav">
+                     <li><a href="{% url 'favorites:favorites_detail' %}">Избранное</a></li>
+                     <li><a href="{% url 'shop:offer' %}">Публичная оферта</a></li>
+                     <li><a href="{% url 'shop:confidentiality' %}">Политика конфиденциальности</a></li>
+                  </ul>
+               </div>
+            </div>
+            <div class="footer__contacts">
+               <h2 class="footer__contacts-title">
+                  Контакты
+                  <button class="footer-btn-nav"><img src="{% static 'src/images/icons/chevron-right.svg' %}"
+                        class="footer__img"></button>
+               </h2>
+               <div class="footer__contacts-nav">
+                  <div class="contacts-links">
+                     <a href="#"><img src="{% static 'src/images/icons/icons8-telegram-app.svg' %}" alt="Telegram icon"
+                           class="contacts-img"></a>
+                     <a href="#"><img src="{% static 'src/images/icons/icons8-vk-circled.svg' %}" alt="VK icon"
+                           class="contacts-img"></a>
+                     <a href="#"><img src="{% static 'src/images/icons/icons8-instagram.svg' %}" alt="Instagram icon"
+                           class="contacts-img"></a>
+                  </div>
+                  <ul class="contacts-nav">
+                     <li>+7 (999) 999 00 00</li>
+                     <li><a href="#">info@manga.ru</a></li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </footer>
+   </div>
+   <p class="copy">©️ 2023 Manga. All rights reserved</p>
+   <script src="{% static 'scripts/script.js' %}"></script>
+</body>
+
+</html>

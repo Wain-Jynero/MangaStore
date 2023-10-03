@@ -1,0 +1,49 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block content %}
+<main class="page">
+   <div class="main-block__container _container">
+      <div class="personal-links">
+         <a href="../index.html">
+            <p>Главная</p>
+         </a>
+         <a href="../pages/refund.html">
+            <p>Обмен и возврат</p>
+         </a>
+      </div>
+      <h2 class="page-title">Обмен и возврат</h2>
+   </div>
+   <section class="refund-proccess _container">
+      <p class="refund-desc">Если Вам не подошёл заказ, мы Вам его обменяем или примем возврат</p>
+      <p class="refund-desc">Обмен и возврат возможен в случае</p>
+      <div class="refund-proccess-info _container">
+         <div class="refund-card">
+            <img src="{% static '/src/images/icons/book-svgrepo-com.svg' %}" alt="Book">
+            <p>Если заказ не был использован и сохранил товарный вид(в том числе не нарушены бирки, ярлыки,
+               упаковочные материалы)</p>
+         </div>
+         <div class="refund-card">
+            <img src="{% static 'src/images/icons/calendar-days-svgrepo-com.svg' %}" alt="Calende">
+            <p>Возврат и обмен осуществляется в течение трёх дней с момента получения заказа
+            </p>
+         </div>
+         <div class="refund-card">
+            <img src="{% static 'src/images/icons/return-box-cycle-svgrepo-com.svg' %}" alt="Return">
+            <p>Возврат и обмен товара возможен только при отправке по Росии</p>
+         </div>
+         <div class="refund-card">
+            <img src="{% static 'src/images/icons/blank-note-svgrepo-com.svg' %}" alt="Blank">
+            <p>Бланк возврата присутствует в каждой посылке</p>
+         </div>
+         <div class="refund-card">
+            <img src="{% static 'src/images/icons/corp-interest-expenses-svgrepo-com.svg' %}" alt="Money">
+            <p>Все расходы по обмену и возврату товара несет покупатель</p>
+         </div>
+         <div class="refund-card">
+            <img src="{% static 'src/images/icons/debit-card-svgrepo-com.svg' %}" alt="Debit card">
+            <p>После получения возврата мы делаем перевод денежных средств на карту клиента</p>
+         </div>
+      </div>
+   </section>
+</main>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block content %}
+<main class="page">
+   <div class="page__main-block main-block _container">
+      <div class="main-block__container _container">
+         <div class="personal-links">
+            <a href="../index.html">
+               <p>Главная</p>
+            </a>
+            <a href="{% url 'shop:product_list' %}">
+               <p>Каталог</p>
+            </a>
+         </div>
+      </div>
+      <div class="catalog-search-mobile">
+         <button class="catalog-search-mob-btn">КАТАЛОГ</button>
+         <div class="catalog-mobile-filtres">
+            <ul class="catalog-filtres-mobile">
+               {% for c in categories %}
+               <a href="{{ c.get_absolute_url }}">
+                  <li>{{ c.name }}</li>
+               </a>
+               {% endfor %}
+            </ul>
+         </div>
+      </div>
+      <script>
+         let filterElemCount = 0;
+         const filterElem = document.querySelector('.catalog-mobile-filtres');
+         const filterBtnElem = document.querySelector('.catalog-search-mob-btn');
+         function openFilter() {
+            filterElemCount++;
+            if (filterElemCount % 2 !==0) {
+            filterElem.style.display = 'block';
+            } else {
+            filterElem.style.display = 'none';
+            }
+         }
+         filterBtnElem.addEventListener('click', openFilter);
+      </script>
+      <div class="catalog-search">
+         <ul class="catalog-filtres">
+            <a href="{% url 'shop:product_list' %}">
+               <li>
+                  <h2>Каталог</h2>
+               </li>
+            </a>
+            {% for c in categories %}
+            <a href="{{ c.get_absolute_url }}">
+               <li>{{ c.name }}</li>
+            </a>
+            {% endfor %}
+         </ul>
+      </div>
+   </div>
+   <div class="products__block _container">
+      <ul class="products clearfix">
+         {% for product in products %}
+         <li class="product-wrapper">
+            <a href="{{ product.get_absolute_url }}" class="product">
+               <div class="product-photo">
+                  <img
+                     src="{% if product.image %}{{ product.image.url }}{% else %}{% static ' img/no_image.png' %}{% endif %}"
+                     alt="Фото товара">
+               </div>
+            </a>
+            <div class="product-info">
+               <p class="product-name">{{ product.name }}</p>
+               <b class="product-price">{{ product.price }} ₽</b>
+            </div>
+         </li>
+         {% endfor %}
+      </ul>
+   </div>
+</main>
+{% endblock %}
